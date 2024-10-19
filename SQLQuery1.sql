@@ -1,0 +1,1 @@
+﻿"EXEC proc_them_sach @maSach=1,@tenSach=N'Ngữ Văn 1',@maLoaiSach=1,@tacGia=N'NXB Việt Nam',@soLuong=10,@giaBan=20000"
