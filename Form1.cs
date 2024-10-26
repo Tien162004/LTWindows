@@ -16,6 +16,10 @@ namespace QuanLySach
         private int maSachLoaiSach;
         private int maSachSach;
         private int maSachLoaiSachLoai;
+        private int maHoaDonHoaDon ;
+
+
+
         public Form1()
         {
             InitializeComponent();
@@ -25,6 +29,7 @@ namespace QuanLySach
         {
             initSach();
             initLoaiSach();
+            initHoaDon();
         }
         private void initSach()
         {
@@ -104,10 +109,10 @@ namespace QuanLySach
         {
             StringBuilder query = new StringBuilder("EXEC proc_them_sach");
             query.Append(" @tenSach = N'" + txtSachTenSach.Text + "'");
-            query.Append(",@maLoaiSach= " + maSachLoaiSach);
-            query.Append(",@tacGia= N'" + txtSachTacGia.Text + "'");
-            query.Append(",@soLuong= " + numSachSoLuong.Value);
-            query.Append(",@giaBan= " + numSachGiaBan.Value);
+            query.Append(",@maLoaiSach = " + maSachLoaiSach);
+            query.Append(",@tacGia = N'" + txtSachTacGia.Text + "'");
+            query.Append(",@soLuong = " + numSachSoLuong.Value);
+            query.Append(",@giaBan = " + numSachGiaBan.Value);
 
 
             int result = dataProvider.execNonQuery(query.ToString());
@@ -196,6 +201,126 @@ namespace QuanLySach
             DataGridViewRow row = dgLoaiSach.Rows[rowId];
             maSachLoaiSachLoai = (int)row.Cells[0].Value;
             txtLoaiSachTenLoaiSach.Text = row.Cells[1].Value.ToString();
+        }
+
+        private void btnLoaiSachThem_Click(object sender, EventArgs e)
+        {
+            StringBuilder query = new StringBuilder("EXEC proc_them_loai_sach");
+            query.Append(" @tenLoaiSach = N'" + txtLoaiSachTenLoaiSach.Text + "'");
+
+
+            int result = dataProvider.execNonQuery(query.ToString());
+            if (result > 0)
+            {
+                loadDgLoaiSach();
+                loadcbSachLoaiSach();
+                MessageBox.Show("Thêm loại sách thành công! ", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+            else
+            {
+                MessageBox.Show("Thêm loại sách không thành công! ", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnLoaiSachSua_Click(object sender, EventArgs e)
+        {
+            StringBuilder query = new StringBuilder("EXEC proc_cap_nhat_loai_sach");
+            query.Append(" @tenLoaiSach = N'" + txtLoaiSachTenLoaiSach.Text + "'");
+            query.Append(",@maLoaiSach = N'" + maSachLoaiSachLoai + "'");
+
+            int result = dataProvider.execNonQuery(query.ToString());
+            if (result > 0)
+            {
+                loadDgLoaiSach();
+                MessageBox.Show("Cập nhật loại sách thành công! ", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+            else
+            {
+                MessageBox.Show("Cập nhật loại sách không thành công! ", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnLoaiSachXoa_Click(object sender, EventArgs e)
+        {
+            DialogResult check = MessageBox.Show("Bạn chắc chắn muốn xóa loại sách" + txtLoaiSachTenLoaiSach.Text + "?", "Cảnh báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+            if (check == DialogResult.Yes)
+            {
+                string query = "DELETE FROM tbl_loai_sach WHERE ma_loai_sach = " + maSachLoaiSachLoai;
+                int result = dataProvider.execNonQuery(query.ToString());
+                if (result > 0)
+                {
+                    loadDgLoaiSach();
+                    loadcbSachLoaiSach();
+                    MessageBox.Show("Xóa loại sách thành công! ", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+                else
+                {
+                    MessageBox.Show("Xóa loại sách không thành công! ", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void initHoaDon()
+        {
+            loadDgHoaDon();
+
+        }
+        private void loadDgHoaDon()
+        {
+            DataTable dt = new DataTable();
+
+            StringBuilder query = new StringBuilder("SELECT ma_hoa_don as [Mã Hóa Đơn]");
+            query.Append(",ngay_lap_hoa_don as [Ngày Lập Hóa Đơn]");
+            query.Append(",ten_khach_hang as [Tên Khách Hàng]");
+            query.Append(",sdt_khach_hang as [SDT Khách Hàng]");
+            query.Append(" FROM tbl_hoa_don");
+
+            dt = dataProvider.execQuery(query.ToString());
+
+            dgHoaDon.DataSource = dt;
+        }
+
+        private void dgHoaDon_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowId = e.RowIndex;
+            if (rowId < 0) rowId = 0;
+            if (rowId == dgHoaDon.RowCount - 1) rowId = rowId - 1;
+
+            DataGridViewRow row = dgHoaDon.Rows[rowId];
+            maHoaDonHoaDon = (int)row.Cells[0].Value;
+            dateNgayLapHoaDon.Value = DateTime.Parse(row.Cells[1].Value.ToString());
+            txtHoaDonTenKH.Text = row.Cells[2].Value.ToString();
+            txtHoaDonSDTKH.Text = row.Cells[3].Value.ToString();
+        }
+
+        private void btnHoaDonThem_Click(object sender, EventArgs e)
+        {
+            StringBuilder query = new StringBuilder("EXEC proc_them_hoa_don");
+            query.Append(" @ngayLapHoaDon = '" + dateNgayLapHoaDon.Value + "'");
+            query.Append(",@tenKhachHang = '" + txtHoaDonTenKH.Text + "'");
+            query.Append(",@sdtKhachHang = '" + txtHoaDonSDTKH.Text + "'");
+
+            int result = dataProvider.execNonQuery(query.ToString());
+
+            if (result > 0)
+            {
+                loadDgHoaDon();
+                MessageBox.Show("Thêm hóa đơn thành công! ", "Thành ncông", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+            else
+            {
+                MessageBox.Show("Thêm hóa đơn không thành công! ", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnHoaDonSua_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnHoaDonXoa_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

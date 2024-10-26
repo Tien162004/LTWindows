@@ -64,7 +64,7 @@
             this.btnHoaDonXoa = new System.Windows.Forms.Button();
             this.btnHoaDonSua = new System.Windows.Forms.Button();
             this.btnHoaDonThem = new System.Windows.Forms.Button();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dgHoaDon = new System.Windows.Forms.DataGridView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
             this.dateNgayLapPhieuNhap = new System.Windows.Forms.DateTimePicker();
@@ -86,7 +86,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgLoaiSach)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgHoaDon)).BeginInit();
             this.tabPage4.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
@@ -327,6 +327,7 @@
             this.btnLoaiSachXoa.TabIndex = 4;
             this.btnLoaiSachXoa.Text = "Xóa";
             this.btnLoaiSachXoa.UseVisualStyleBackColor = true;
+            this.btnLoaiSachXoa.Click += new System.EventHandler(this.btnLoaiSachXoa_Click);
             // 
             // btnLoaiSachSua
             // 
@@ -337,6 +338,7 @@
             this.btnLoaiSachSua.TabIndex = 3;
             this.btnLoaiSachSua.Text = "Sửa";
             this.btnLoaiSachSua.UseVisualStyleBackColor = true;
+            this.btnLoaiSachSua.Click += new System.EventHandler(this.btnLoaiSachSua_Click);
             // 
             // btnLoaiSachThem
             // 
@@ -347,6 +349,7 @@
             this.btnLoaiSachThem.TabIndex = 0;
             this.btnLoaiSachThem.Text = "Thêm";
             this.btnLoaiSachThem.UseVisualStyleBackColor = true;
+            this.btnLoaiSachThem.Click += new System.EventHandler(this.btnLoaiSachThem_Click);
             // 
             // dgLoaiSach
             // 
@@ -363,7 +366,7 @@
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.panel3);
-            this.tabPage3.Controls.Add(this.dataGridView2);
+            this.tabPage3.Controls.Add(this.dgHoaDon);
             this.tabPage3.Location = new System.Drawing.Point(4, 34);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -446,6 +449,7 @@
             this.btnHoaDonXoa.TabIndex = 4;
             this.btnHoaDonXoa.Text = "Xóa";
             this.btnHoaDonXoa.UseVisualStyleBackColor = true;
+            this.btnHoaDonXoa.Click += new System.EventHandler(this.btnHoaDonXoa_Click);
             // 
             // btnHoaDonSua
             // 
@@ -456,6 +460,7 @@
             this.btnHoaDonSua.TabIndex = 3;
             this.btnHoaDonSua.Text = "Sửa";
             this.btnHoaDonSua.UseVisualStyleBackColor = true;
+            this.btnHoaDonSua.Click += new System.EventHandler(this.btnHoaDonSua_Click);
             // 
             // btnHoaDonThem
             // 
@@ -466,16 +471,19 @@
             this.btnHoaDonThem.TabIndex = 0;
             this.btnHoaDonThem.Text = "Thêm";
             this.btnHoaDonThem.UseVisualStyleBackColor = true;
+            this.btnHoaDonThem.Click += new System.EventHandler(this.btnHoaDonThem_Click);
             // 
-            // dataGridView2
+            // dgHoaDon
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(25, 19);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowHeadersWidth = 62;
-            this.dataGridView2.RowTemplate.Height = 28;
-            this.dataGridView2.Size = new System.Drawing.Size(1183, 378);
-            this.dataGridView2.TabIndex = 2;
+            this.dgHoaDon.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgHoaDon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgHoaDon.Location = new System.Drawing.Point(25, 19);
+            this.dgHoaDon.Name = "dgHoaDon";
+            this.dgHoaDon.RowHeadersWidth = 62;
+            this.dgHoaDon.RowTemplate.Height = 28;
+            this.dgHoaDon.Size = new System.Drawing.Size(1183, 378);
+            this.dgHoaDon.TabIndex = 2;
+            this.dgHoaDon.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgHoaDon_CellClick);
             // 
             // tabPage4
             // 
@@ -600,7 +608,7 @@
             this.tabPage3.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgHoaDon)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
@@ -645,7 +653,7 @@
         private System.Windows.Forms.Button btnHoaDonXoa;
         private System.Windows.Forms.Button btnHoaDonSua;
         private System.Windows.Forms.Button btnHoaDonThem;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dgHoaDon;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtHoaDonSDTKH;
         private System.Windows.Forms.DateTimePicker dateNgayLapHoaDon;
