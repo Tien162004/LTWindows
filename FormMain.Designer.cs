@@ -1,6 +1,6 @@
 ﻿namespace QuanLySach
 {
-    partial class Form1
+    partial class FormMain
     {
         /// <summary>
         /// Required designer variable.
@@ -74,7 +74,9 @@
             this.btnPhieuNhapXoa = new System.Windows.Forms.Button();
             this.btnPhieuNhapSua = new System.Windows.Forms.Button();
             this.btnPhieuNhapThem = new System.Windows.Forms.Button();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.dgPhieuNhap = new System.Windows.Forms.DataGridView();
+            this.btnPhieuNhapChiTiet = new System.Windows.Forms.Button();
+            this.btnHoaDonChiTiet = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -89,7 +91,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgHoaDon)).BeginInit();
             this.tabPage4.SuspendLayout();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgPhieuNhap)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -377,6 +379,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.btnHoaDonChiTiet);
             this.panel3.Controls.Add(this.label6);
             this.panel3.Controls.Add(this.txtHoaDonSDTKH);
             this.panel3.Controls.Add(this.dateNgayLapHoaDon);
@@ -407,6 +410,7 @@
             this.txtHoaDonSDTKH.Name = "txtHoaDonSDTKH";
             this.txtHoaDonSDTKH.Size = new System.Drawing.Size(351, 26);
             this.txtHoaDonSDTKH.TabIndex = 18;
+            this.txtHoaDonSDTKH.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtHoaDonSDTKH_KeyPress);
             // 
             // dateNgayLapHoaDon
             // 
@@ -488,7 +492,7 @@
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.panel4);
-            this.tabPage4.Controls.Add(this.dataGridView3);
+            this.tabPage4.Controls.Add(this.dgPhieuNhap);
             this.tabPage4.Location = new System.Drawing.Point(4, 34);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
@@ -499,6 +503,7 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.btnPhieuNhapChiTiet);
             this.panel4.Controls.Add(this.dateNgayLapPhieuNhap);
             this.panel4.Controls.Add(this.label8);
             this.panel4.Controls.Add(this.txtPhieuNhapNhaCungCap);
@@ -553,6 +558,7 @@
             this.btnPhieuNhapXoa.TabIndex = 4;
             this.btnPhieuNhapXoa.Text = "Xóa";
             this.btnPhieuNhapXoa.UseVisualStyleBackColor = true;
+            this.btnPhieuNhapXoa.Click += new System.EventHandler(this.btnPhieuNhapXoa_Click);
             // 
             // btnPhieuNhapSua
             // 
@@ -563,6 +569,7 @@
             this.btnPhieuNhapSua.TabIndex = 3;
             this.btnPhieuNhapSua.Text = "Sửa";
             this.btnPhieuNhapSua.UseVisualStyleBackColor = true;
+            this.btnPhieuNhapSua.Click += new System.EventHandler(this.btnPhieuNhapSua_Click);
             // 
             // btnPhieuNhapThem
             // 
@@ -573,24 +580,49 @@
             this.btnPhieuNhapThem.TabIndex = 0;
             this.btnPhieuNhapThem.Text = "Thêm";
             this.btnPhieuNhapThem.UseVisualStyleBackColor = true;
+            this.btnPhieuNhapThem.Click += new System.EventHandler(this.btnPhieuNhapThem_Click);
             // 
-            // dataGridView3
+            // dgPhieuNhap
             // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(25, 19);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.RowHeadersWidth = 62;
-            this.dataGridView3.RowTemplate.Height = 28;
-            this.dataGridView3.Size = new System.Drawing.Size(1183, 430);
-            this.dataGridView3.TabIndex = 4;
+            this.dgPhieuNhap.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgPhieuNhap.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgPhieuNhap.Location = new System.Drawing.Point(25, 19);
+            this.dgPhieuNhap.Name = "dgPhieuNhap";
+            this.dgPhieuNhap.RowHeadersWidth = 62;
+            this.dgPhieuNhap.RowTemplate.Height = 28;
+            this.dgPhieuNhap.Size = new System.Drawing.Size(1183, 430);
+            this.dgPhieuNhap.TabIndex = 4;
+            this.dgPhieuNhap.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgPhieuNhap_CellClick);
             // 
-            // Form1
+            // btnPhieuNhapChiTiet
+            // 
+            this.btnPhieuNhapChiTiet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.btnPhieuNhapChiTiet.Location = new System.Drawing.Point(558, 62);
+            this.btnPhieuNhapChiTiet.Name = "btnPhieuNhapChiTiet";
+            this.btnPhieuNhapChiTiet.Size = new System.Drawing.Size(95, 36);
+            this.btnPhieuNhapChiTiet.TabIndex = 18;
+            this.btnPhieuNhapChiTiet.Text = "Chi Tiết";
+            this.btnPhieuNhapChiTiet.UseVisualStyleBackColor = true;
+            this.btnPhieuNhapChiTiet.Click += new System.EventHandler(this.btnPhieuNhapChiTiet_Click);
+            // 
+            // btnHoaDonChiTiet
+            // 
+            this.btnHoaDonChiTiet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.btnHoaDonChiTiet.Location = new System.Drawing.Point(563, 112);
+            this.btnHoaDonChiTiet.Name = "btnHoaDonChiTiet";
+            this.btnHoaDonChiTiet.Size = new System.Drawing.Size(95, 36);
+            this.btnHoaDonChiTiet.TabIndex = 20;
+            this.btnHoaDonChiTiet.Text = "Chi Tiết";
+            this.btnHoaDonChiTiet.UseVisualStyleBackColor = true;
+            this.btnHoaDonChiTiet.Click += new System.EventHandler(this.btnHoaDonChiTiet_Click);
+            // 
+            // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1280, 652);
             this.Controls.Add(this.tabControl1);
-            this.Name = "Form1";
+            this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản Lý Bán Sách";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -612,7 +644,7 @@
             this.tabPage4.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgPhieuNhap)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -665,7 +697,9 @@
         private System.Windows.Forms.Button btnPhieuNhapXoa;
         private System.Windows.Forms.Button btnPhieuNhapSua;
         private System.Windows.Forms.Button btnPhieuNhapThem;
-        private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.DataGridView dgPhieuNhap;
+        private System.Windows.Forms.Button btnPhieuNhapChiTiet;
+        private System.Windows.Forms.Button btnHoaDonChiTiet;
     }
 }
 
